@@ -1,3 +1,9 @@
 import React from "react"
 
-export default () => <div>Castle Inc.</div>
+const IndexPage = () => (
+  <div>
+    <h1>Castle Inc.</h1>
+  </div>
+)
+
+export default IndexPage
