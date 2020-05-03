@@ -3,7 +3,7 @@ import { Layout } from "~components"
 
 const IndexPage = () => (
   <Layout>
-    <h1>Castle Inc.</h1>
+    <h1>Castle</h1>
   </Layout>
 )
 

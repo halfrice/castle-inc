@@ -1,8 +1,10 @@
 import React from "react"
+import "normalize.css/normalize.css"
+import { Globals } from "~styles"
 
 const Layout = ({ children }) => (
   <div id="layout">
-    <h1>Layout</h1>
+    <Globals />
     {children}
   </div>
 )
