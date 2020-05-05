@@ -1,4 +1,7 @@
 import { createGlobalStyle } from "styled-components"
+import theme from "./theme.yml"
+
+const { colors, fonts, fontSizes } = theme
 
 const Globals = createGlobalStyle`
   html {
@@ -15,6 +18,9 @@ const Globals = createGlobalStyle`
   body {
     width: 100%;
     min-height: 100%;
+    background-color: ${colors.light};
+    font-family: ${fonts.serif};
+    font-size: ${fontSizes.default};
     font-weight: 400;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -25,7 +31,7 @@ const Globals = createGlobalStyle`
   h3,
   h4,
   h5 {
-    color: magenta;
+    color: ${colors.darkBlue};
     font-weight: 600;
   }
 `
