@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "gatsby": "^2.21.0",
+    "gatsby-plugin-react-helmet": "^3.3.0",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-helmet": "^6.0.0",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
