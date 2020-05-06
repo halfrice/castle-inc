@@ -1,9 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
 import "normalize.css/normalize.css"
 import { Seo } from "~components"
 import { Globals } from "~styles"
+
+const StyledLayout = styled.div`
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 100%;
+  min-height: 100vh;
+`
 
 const Layout = ({ children }) => {
   return (
@@ -20,11 +28,11 @@ const Layout = ({ children }) => {
         }
       `}
       render={({ site }) => (
-        <div id="layout">
+        <StyledLayout id="layout">
           <Seo metadata={site.siteMetadata} />
           <Globals />
           {children}
-        </div>
+        </StyledLayout>
       )}
     />
   )

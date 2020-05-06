@@ -1,9 +1,12 @@
 import React from "react"
 import { Layout } from "~components"
+import { Main } from "~styles"
 
 const IndexPage = () => (
   <Layout>
-    <h2>Castle</h2>
+    <Main>
+      <h2>Castle</h2>
+    </Main>
   </Layout>
 )
 
