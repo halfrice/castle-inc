@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import "normalize.css/normalize.css"
-import { Seo } from "~components"
+import { Nav, Seo } from "~components"
 import { Globals } from "~styles"
 
 const StyledLayout = styled.div`
@@ -12,6 +12,7 @@ const StyledLayout = styled.div`
   grid-template-columns: 100%;
   min-height: 100vh;
 `
+const StyledDisplay = styled.div``
 
 const Layout = ({ children }) => {
   return (
@@ -31,7 +32,10 @@ const Layout = ({ children }) => {
         <StyledLayout id="layout">
           <Seo metadata={site.siteMetadata} />
           <Globals />
-          {children}
+          <StyledDisplay id="display">
+            <Nav />
+            {children}
+          </StyledDisplay>
         </StyledLayout>
       )}
     />
