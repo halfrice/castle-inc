@@ -34,6 +34,13 @@ const Globals = createGlobalStyle`
     color: ${colors.darkBlue};
     font-weight: 600;
   }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    pointer-events: none;
+  }
 `
 
 export default Globals

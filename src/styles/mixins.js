@@ -46,6 +46,10 @@ const mixins = {
       ${devices.phone`padding-right: 1.5rem;`};
     `,
   },
+  shadow: css`
+    -webkit-filter: drop-shadow(-12px 12px 8px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(-12px 12px 8px rgba(0, 0, 0, 0.5));
+  `,
 }
 
 export default mixins

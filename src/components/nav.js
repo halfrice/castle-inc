@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Main, mixins, theme } from "~styles"
+import { IconLion } from "~components/icons"
 
 const { flex } = mixins
 const { colors, fonts, fontSizes } = theme
@@ -21,19 +22,37 @@ const StyledNav = styled.nav`
   width: 100%;
   max-width: 64rem;
 `
-const StyledLogo = styled.div`
-  ${flex.center};
-  color: ${colors.darkBlue};
+const LogoContainer = styled.div`
+  ${flex.between};
+  margin-left: -0.5rem;
+  padding: 0.5rem 0.5rem;
+  color: ${colors.dark};
+  font-family: ${fonts.monospace};
   font-size: ${fontSizes.xxl};
   font-weight: 600;
-  font-family: ${fonts.monospace};
+`
+const StyledLogo = styled.div`
+  ${flex.center};
+  svg {
+    margin-right: 1rem;
+    width: ${fontSizes.h1};
+    height: ${fontSizes.h1};
+    fill: ${colors.dark};
+    user-select: none;
+    ${mixins.shadow};
+  }
 `
 
 const Nav = () => {
   return (
     <StyledMain>
       <StyledNav>
-        <StyledLogo>Castle</StyledLogo>
+        <LogoContainer>
+          <StyledLogo>
+            <IconLion />
+            Castle
+          </StyledLogo>
+        </LogoContainer>
       </StyledNav>
     </StyledMain>
   )
