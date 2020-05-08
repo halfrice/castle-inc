@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components"
 import theme from "./theme.yml"
+import Transitions from "./Transitions"
 
 const { colors, fonts, fontSizes } = theme
 
@@ -41,6 +42,8 @@ const Globals = createGlobalStyle`
     vertical-align: middle;
     pointer-events: none;
   }
+
+  ${Transitions};
 `
 
 export default Globals

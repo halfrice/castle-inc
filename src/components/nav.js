@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { Main, mixins, theme } from "~styles"
 
 const { flex } = mixins
@@ -32,10 +33,23 @@ const StyledLogo = styled.div`
 `
 
 const Nav = () => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsMounted(true), 0)
+    return () => clearTimeout(timeout)
+  }, [])
+
   return (
     <StyledMain>
       <StyledNav>
-        <StyledLogo>Castle</StyledLogo>
+        <TransitionGroup component={null}>
+          {isMounted && (
+            <CSSTransition classNames="fadedown" timeout={3000}>
+              <StyledLogo>Castle</StyledLogo>
+            </CSSTransition>
+          )}
+        </TransitionGroup>
       </StyledNav>
     </StyledMain>
   )

@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { devices, mixins, Section, theme } from "~styles"
 import { IconLion } from "~components/icons"
 
@@ -11,13 +12,13 @@ const StyledIntro = styled(Section)`
   max-width: 64rem;
   min-height: 24rem;
 `
-const StyledInner = styled.div`
+const StyledTransition = styled(TransitionGroup)`
   width: 100%;
 `
 const StyledLogo = styled.div`
   svg {
     margin-left: -2.5rem;
-    margin-bottom: -1rem;
+    margin-bottom: -1.5rem;
     ${devices.desktop`margin-left: -1.5rem`};
     ${devices.tablet`margin-left: -0.75rem`};
     ${devices.phone`margin-left: 0rem`};
@@ -44,15 +45,43 @@ const StyledTitle2 = styled.div`
 `
 
 const Intro = () => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsMounted(true), 1000)
+    return () => clearTimeout(timeout)
+  }, [])
+
+  const logo = () => (
+    <StyledLogo style={{ transitionDelay: "0ms" }}>
+      <IconLion />
+    </StyledLogo>
+  )
+
+  const title = () => (
+    <StyledTitle style={{ transitionDelay: "200ms" }}>leap with</StyledTitle>
+  )
+
+  const title2 = () => (
+    <StyledTitle2 style={{ transitionDelay: "400ms" }}>CONFIDENCE</StyledTitle2>
+  )
+
+  const items = [logo, title, title2]
+  const fxOrder = ["left", "up", "up"]
+
   return (
     <StyledIntro>
-      <StyledInner>
-        <StyledLogo>
-          <IconLion />
-        </StyledLogo>
-        <StyledTitle>leap with</StyledTitle>
-        <StyledTitle2>CONFIDENCE</StyledTitle2>
-      </StyledInner>
+      <StyledTransition>
+        {isMounted &&
+          items.map((item, i) => {
+            const fx = fxOrder[i] || ""
+            return (
+              <CSSTransition key={i} classNames={`fade${fx}`} timeout={3000}>
+                {item}
+              </CSSTransition>
+            )
+          })}
+      </StyledTransition>
     </StyledIntro>
   )
 }
