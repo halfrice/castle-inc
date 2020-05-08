@@ -47,8 +47,8 @@ const mixins = {
     `,
   },
   shadow: css`
-    -webkit-filter: drop-shadow(-12px 12px 8px rgba(0, 0, 0, 0.5));
-    filter: drop-shadow(-12px 12px 8px rgba(0, 0, 0, 0.5));
+    -webkit-filter: drop-shadow(-1.5rem 0.75rem 0.5rem rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(-1.5rem 0.75rem 0.5rem rgba(0, 0, 0, 0.5));
   `,
 }
 

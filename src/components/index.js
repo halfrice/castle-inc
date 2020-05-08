@@ -1,5 +1,6 @@
+import Intro from "./intro"
 import Layout from "./layout"
 import Nav from "./nav"
 import Seo from "./seo"
 
-export { Layout, Nav, Seo }
+export { Intro, Layout, Nav, Seo }
