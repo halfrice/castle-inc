@@ -18,9 +18,9 @@ const StyledTransition = styled(TransitionGroup)`
 `
 const StyledLogo = styled.div`
   svg {
-    margin-left: -2.5rem;
     margin-bottom: -1.5rem;
-    ${devices.desktop`margin-left: -1.5rem`};
+    margin-left: -2.5rem;
+    ${devices.desktop`margin-left: -2rem`};
     ${devices.tablet`margin-left: -0.75rem`};
     ${devices.phone`margin-left: 0rem`};
     width: 8rem;

@@ -17,4 +17,9 @@ module.exports = {
     display: "minimal-ui",
     lang: "en",
   },
+  footerLinks: [
+    { name: "React", url: "#" },
+    { name: "GatsbyJS", url: "#" },
+    { name: "Netlify", url: "#" },
+  ],
 }

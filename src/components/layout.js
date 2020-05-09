@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import "normalize.css/normalize.css"
-import { Nav, Seo } from "~components"
+import { Footer, Nav, Seo } from "~components"
 import { Globals } from "~styles"
 
 const StyledLayout = styled.div`
@@ -35,6 +35,7 @@ const Layout = ({ children }) => {
           <StyledDisplay id="display">
             <Nav />
             {children}
+            <Footer />
           </StyledDisplay>
         </StyledLayout>
       )}
