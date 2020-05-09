@@ -6,5 +6,20 @@ module.exports = {
     description: config.site.description,
     url: config.site.url,
   },
-  plugins: [`gatsby-plugin-react-helmet`],
+  plugins: [
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "content",
+        path: `${__dirname}/src/content/`,
+      },
+    },
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [],
+      },
+    },
+  ],
 }

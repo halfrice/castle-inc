@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
+import PropTypes from "prop-types"
 import styled from "styled-components"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { devices, mixins, Section, theme } from "~styles"
-import { IconLion } from "~components/icons"
+import { Icon } from "~components/icons"
 
 const { flex } = mixins
 const { colors, fontSizes } = theme
@@ -23,13 +24,16 @@ const StyledLogo = styled.div`
     ${devices.tablet`margin-left: -0.75rem`};
     ${devices.phone`margin-left: 0rem`};
     width: 8rem;
+    ${devices.tablet`width: 6rem`};
     height: 8rem;
+    ${devices.tablet`height: 6rem`};
     fill: ${colors.black};
     user-select: none;
     ${mixins.shadow};
   }
 `
 const StyledTitle = styled.div`
+  margin: 0 0 0.25rem -1px;
   font-size: ${fontSizes.h2};
   ${devices.desktop`font-size: 2.33rem`};
   ${devices.tablet`font-size: 2.17rem`};
@@ -37,15 +41,24 @@ const StyledTitle = styled.div`
   color: ${colors.redmoon};
 `
 const StyledTitle2 = styled.div`
+  margin-left: -2px;
+  margin-bottom: 0.5rem;
   font-size: ${fontSizes.h1};
   ${devices.desktop`font-size: 2.884rem`};
   ${devices.tablet`font-size: 2.667rem`};
   ${devices.phone`font-size: ${fontSizes.h2}`};
   color: ${colors.grey};
 `
+const StyledContent = styled.p`
+  font-size: ${fontSizes.md};
+  ${devices.tablet`font-size: ${fontSizes.sm}`};
+  ${devices.phone`font-size: ${fontSizes.xs}`};
+`
 
-const Intro = () => {
+const Intro = ({ data }) => {
   const [isMounted, setIsMounted] = useState(false)
+
+  const { frontmatter, html } = data[0].node
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 1000)
@@ -54,20 +67,31 @@ const Intro = () => {
 
   const logo = () => (
     <StyledLogo style={{ transitionDelay: "0ms" }}>
-      <IconLion />
+      <Icon name={frontmatter.icon} />
     </StyledLogo>
   )
 
   const title = () => (
-    <StyledTitle style={{ transitionDelay: "200ms" }}>leap with</StyledTitle>
+    <StyledTitle style={{ transitionDelay: "200ms" }}>
+      {frontmatter.title}
+    </StyledTitle>
   )
 
   const title2 = () => (
-    <StyledTitle2 style={{ transitionDelay: "400ms" }}>CONFIDENCE</StyledTitle2>
+    <StyledTitle2 style={{ transitionDelay: "400ms" }}>
+      {frontmatter.title2}
+    </StyledTitle2>
   )
 
-  const items = [logo, title, title2]
-  const fxOrder = ["left", "up", "up"]
+  const content = () => (
+    <StyledContent
+      style={{ transitionDelay: "600ms" }}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  )
+
+  const items = [logo, title, title2, content]
+  const fxOrder = ["left", "up", "up", "up"]
 
   return (
     <StyledIntro>
@@ -84,6 +108,10 @@ const Intro = () => {
       </StyledTransition>
     </StyledIntro>
   )
+}
+
+Intro.propTypes = {
+  data: PropTypes.array.isRequired,
 }
 
 export default Intro

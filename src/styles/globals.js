@@ -36,6 +36,11 @@ const Globals = createGlobalStyle`
     font-weight: 600;
   }
 
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
   svg {
     width: 100%;
     height: 100%;
