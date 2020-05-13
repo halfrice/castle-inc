@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
-import { Main, mixins, theme } from "~styles"
+import { Social } from "~components"
+import { devices, Main, mixins, theme } from "~styles"
 
 const { flex } = mixins
 const { colors, fonts, fontSizes } = theme
@@ -9,7 +10,8 @@ const { colors, fonts, fontSizes } = theme
 const StyledMain = styled(Main)`
   ${flex.center};
   width: 100%;
-  height: 6rem;
+  min-height: 6rem;
+  ${devices.phone`min-height: 8rem`};
   background-color: ${colors.light};
   filter: none !important;
   pointer-events: auto !important;
@@ -18,7 +20,8 @@ const StyledMain = styled(Main)`
 `
 const StyledNav = styled.nav`
   ${flex.between};
-  position: relative;
+  ${devices.phone`${flex.start}`};
+  ${devices.phone`flex-direction: column`};
   width: 100%;
   max-width: 64rem;
 `
@@ -45,11 +48,12 @@ const Nav = () => {
       <StyledNav>
         <TransitionGroup component={null}>
           {isMounted && (
-            <CSSTransition classNames="fadedown" timeout={3000}>
+            <CSSTransition classNames="fade" timeout={3000}>
               <StyledLogo>Castle</StyledLogo>
             </CSSTransition>
           )}
         </TransitionGroup>
+        <Social />
       </StyledNav>
     </StyledMain>
   )

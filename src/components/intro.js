@@ -11,7 +11,7 @@ const { colors, fontSizes } = theme
 const StyledIntro = styled(Section)`
   ${flex.center};
   max-width: 64rem;
-  min-height: 24rem;
+  min-height: calc(100vh - calc(16rem));
 `
 const StyledTransition = styled(TransitionGroup)`
   width: 100%;
@@ -19,6 +19,7 @@ const StyledTransition = styled(TransitionGroup)`
 const StyledLogo = styled.div`
   svg {
     margin-bottom: -1.5rem;
+    ${devices.tablet`margin-bottom: -1rem`};
     margin-left: -2.5rem;
     ${devices.desktop`margin-left: -2rem`};
     ${devices.tablet`margin-left: -0.75rem`};
@@ -61,7 +62,7 @@ const Intro = ({ data }) => {
   const { frontmatter, html } = data[0].node
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 1000)
+    const timeout = setTimeout(() => setIsMounted(true), 1600)
     return () => clearTimeout(timeout)
   }, [])
 
@@ -72,7 +73,7 @@ const Intro = ({ data }) => {
   )
 
   const title = () => (
-    <StyledTitle style={{ transitionDelay: "200ms" }}>
+    <StyledTitle style={{ transitionDelay: "300ms" }}>
       {frontmatter.title}
     </StyledTitle>
   )
@@ -85,7 +86,7 @@ const Intro = ({ data }) => {
 
   const content = () => (
     <StyledContent
-      style={{ transitionDelay: "600ms" }}
+      style={{ transitionDelay: "500ms" }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

@@ -17,6 +17,28 @@ module.exports = {
     display: "minimal-ui",
     lang: "en",
   },
+  socialMedia: [
+    {
+      name: "Facebook",
+      url: "https://face.me",
+      color: "#3b5998",
+    },
+    {
+      name: "Twitter",
+      url: "https://twittah.com/",
+      color: "#1da1f2",
+    },
+    {
+      name: "Instagram",
+      url: "https://insta.com/",
+      color: "#1da1f2",
+    },
+    {
+      name: "Google",
+      url: "mailto:gmail@gmail.com",
+      color: "#4285f4",
+    },
+  ],
   footerLinks: [
     { name: "React", url: "#" },
     { name: "GatsbyJS", url: "#" },

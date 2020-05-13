@@ -34,7 +34,7 @@ const Transitions = css`
   }
   .faderight-enter {
     opacity: 0.01;
-    transform: translateX(2rem);
+    transform: translateX(3rem);
     transition: opacity 500ms ${theme.easing}, transform 500ms ${theme.easing};
   }
   .faderight-enter-active {

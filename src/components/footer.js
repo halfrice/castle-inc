@@ -14,11 +14,13 @@ const FooterContainer = styled(Main)`
   bottom: 0;
   width: 100%;
   min-height: 6rem;
+  ${devices.tablet`min-height: 4rem`};
   background-color: ${colors.light};
   font-family: ${fonts.monospace};
   font-size: ${fontSizes.xxs};
   ${devices.tablet`font-size: ${fontSizes.xxs};`};
   color: ${colors.dark};
+  transition: ${theme.transition};
 `
 const FooterWrapper = styled.div`
   ${flex.between};
@@ -26,17 +28,14 @@ const FooterWrapper = styled.div`
   flex-direction: row;
   ${devices.tablet`flex-direction: column;`};
   margin: 0;
-  ${devices.tablet`padding: 3rem 0;`};
-  ${devices.phone`padding: 1.5rem 0;`};
   width: 100%;
   max-width: 64rem;
   ${devices.tablet`height: auto;`};
 `
 const LegaleseContainer = styled.div`
-  ${flex.start};
+  ${flex.end};
   padding: 0.125rem 0;
-  width: 33%;
-  ${devices.tablet`width: 100%;`};
+  width: 100%;
 `
 const Legalese = styled.div``
 const Links = styled.div`
@@ -72,7 +71,7 @@ const Footer = () => {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 2000)
+    const timeout = setTimeout(() => setIsMounted(true), 2500)
     return () => clearTimeout(timeout)
   }, [])
 
@@ -81,7 +80,7 @@ const Footer = () => {
       <FooterWrapper>
         <TransitionGroup component={null}>
           {isMounted && (
-            <CSSTransition classNames="fadeup" timeout={3000}>
+            <CSSTransition classNames="fade" timeout={3000}>
               <LegaleseContainer style={{ transitionDelay: "0ms" }}>
                 <Legalese>© {new Date().getFullYear()} Castle Inc.</Legalese>
               </LegaleseContainer>
@@ -89,9 +88,9 @@ const Footer = () => {
           )}
         </TransitionGroup>
 
-        <TransitionGroup component={null}>
+        {/* <TransitionGroup component={null}>
           {isMounted && (
-            <CSSTransition classNames="fadeup" timeout={3000}>
+            <CSSTransition classNames="fade" timeout={3000}>
               <Links style={{ transitionDelay: "200ms" }}>
                 {footerLinks &&
                   footerLinks.map(({ name, url }, i) => (
@@ -108,17 +107,17 @@ const Footer = () => {
               </Links>
             </CSSTransition>
           )}
-        </TransitionGroup>
+        </TransitionGroup> */}
 
-        <TransitionGroup component={null}>
+        {/* <TransitionGroup component={null}>
           {isMounted && (
-            <CSSTransition classNames="fadeup" timeout={3000}>
+            <CSSTransition classNames="fade" timeout={3000}>
               <ClockContainer style={{ transitionDelay: "400ms" }}>
                 <Clock />
               </ClockContainer>
             </CSSTransition>
           )}
-        </TransitionGroup>
+        </TransitionGroup> */}
       </FooterWrapper>
     </FooterContainer>
   )

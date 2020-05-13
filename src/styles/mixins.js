@@ -16,12 +16,12 @@ const mixins = {
     start: css`
       display: flex;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-start;
     `,
     end: css`
       display: flex;
       justify-content: flex-end;
-      align-items: center;
+      align-items: flex-end;
     `,
   },
   padding: {
