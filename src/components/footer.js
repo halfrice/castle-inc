@@ -1,21 +1,30 @@
-import React, { useState, useEffect } from "react"
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react"
 import styled from "styled-components"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
-import { Clock } from "~components"
+// import { Clock } from "~components"
 import { devices, Main, mixins, theme } from "~styles"
-import { footerLinks } from "~config"
+// import { footerLinks } from "~config"
+import { DisplayContext } from "~contexts"
+import { throttle, useEventListener } from "~utils"
 
 const { fonts, fontSizes, colors } = theme
 const { flex } = mixins
 
 const FooterContainer = styled(Main)`
   ${flex.center};
-  position: fixed;
+  position: ${props => (props.fixed ? `fixed` : `relative`)};
   bottom: 0;
   width: 100%;
   min-height: 6rem;
-  ${devices.tablet`min-height: 4rem`};
-  background-color: ${colors.light};
+  ${devices.tablet`min-height: 5rem`};
+  background-color: ${colors.white};
   font-family: ${fonts.monospace};
   font-size: ${fontSizes.xxs};
   ${devices.tablet`font-size: ${fontSizes.xxs};`};
@@ -38,45 +47,70 @@ const LegaleseContainer = styled.div`
   width: 100%;
 `
 const Legalese = styled.div``
-const Links = styled.div`
-  ${flex.center};
-  ${devices.tablet`${flex.start};`};
-  width: 34%;
-  ${devices.tablet`width: 100%;`}
-`
-const Link = styled.a`
-  ${flex.center};
-  ${devices.tablet`:first-of-type { margin-left: -0.125rem; }`};
-  padding: 0.125rem;
-  margin: 0 0.25rem;
-  color: ${colors.darkPink};
-  transition: ${theme.transition};
-  &:hover,
-  &:focus,
-  &:active {
-    opacity: 0.5;
-  }
-`
-const ClockContainer = styled.div`
-  ${flex.end};
-  ${devices.tablet`${flex.start}`};
-  padding: 0.125rem 0;
-  width: 33%;
-  ${devices.tablet`width: 100%;`};
-  text-align: right;
-  ${devices.phone`text-align: left;`};
-`
+// const Links = styled.div`
+//   ${flex.center};
+//   ${devices.tablet`${flex.start};`};
+//   width: 34%;
+//   ${devices.tablet`width: 100%;`}
+// `
+// const Link = styled.a`
+//   ${flex.center};
+//   ${devices.tablet`:first-of-type { margin-left: -0.125rem; }`};
+//   padding: 0.125rem;
+//   margin: 0 0.25rem;
+//   color: ${colors.darkPink};
+//   transition: ${theme.transition};
+//   &:hover,
+//   &:focus,
+//   &:active {
+//     opacity: 0.5;
+//   }
+// `
+// const ClockContainer = styled.div`
+//   ${flex.end};
+//   ${devices.tablet`${flex.start}`};
+//   padding: 0.125rem 0;
+//   width: 33%;
+//   ${devices.tablet`width: 100%;`};
+//   text-align: right;
+//   ${devices.phone`text-align: left;`};
+// `
 
 const Footer = () => {
   const [isMounted, setIsMounted] = useState(false)
+  const footerRef = useRef()
+  const displayContext = useContext(DisplayContext)
+  const { introHeight, footerHeight, setFooterHeight } = displayContext
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 2500)
     return () => clearTimeout(timeout)
   }, [])
 
+  const setFooterHeightWrapper = () => {
+    if (footerRef.current) {
+      setFooterHeight(footerRef.current.offsetHeight)
+    }
+  }
+
+  useLayoutEffect(() => {
+    setFooterHeightWrapper()
+  })
+
+  const handleResize = useCallback(
+    throttle(() => {
+      setFooterHeightWrapper()
+    }, 100),
+    []
+  )
+
+  useEventListener("resize", handleResize)
+
+  const cssPositionfixed =
+    introHeight < document.documentElement.clientHeight - footerHeight
+
   return (
-    <FooterContainer>
+    <FooterContainer ref={footerRef} fixed={cssPositionfixed}>
       <FooterWrapper>
         <TransitionGroup component={null}>
           {isMounted && (

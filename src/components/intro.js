@@ -1,9 +1,18 @@
-import React, { useState, useEffect } from "react"
+import React, {
+  useContext,
+  useCallback,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+  useState,
+} from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { devices, mixins, Section, theme } from "~styles"
 import { Icon } from "~components/icons"
+import { DisplayContext } from "~contexts"
+import { throttle, useEventListener } from "~utils"
 
 const { flex } = mixins
 const { colors, fontSizes } = theme
@@ -58,13 +67,35 @@ const StyledContent = styled.p`
 
 const Intro = ({ data }) => {
   const [isMounted, setIsMounted] = useState(false)
+  const displayContext = useContext(DisplayContext)
+  const { setIntroHeight } = displayContext
+  const introRef = useRef()
 
   const { frontmatter, html } = data[0].node
+
+  const setIntroHeightWrapper = () => {
+    if (introRef.current) {
+      setIntroHeight(introRef.current.offsetHeight + introRef.current.offsetTop)
+    }
+  }
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 1600)
     return () => clearTimeout(timeout)
   }, [])
+
+  useLayoutEffect(() => {
+    setIntroHeightWrapper()
+  })
+
+  const handleResize = useCallback(
+    throttle(() => {
+      setIntroHeightWrapper()
+    }, 100),
+    []
+  )
+
+  useEventListener("resize", handleResize)
 
   const logo = () => (
     <StyledLogo style={{ transitionDelay: "0ms" }}>
@@ -95,7 +126,7 @@ const Intro = ({ data }) => {
   const fxOrder = ["left", "up", "up", "up"]
 
   return (
-    <StyledIntro>
+    <StyledIntro ref={introRef}>
       <StyledTransition>
         {isMounted &&
           items.map((item, i) => {

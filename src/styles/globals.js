@@ -19,12 +19,13 @@ const Globals = createGlobalStyle`
   body {
     width: 100%;
     min-height: 100%;
-    background-color: ${colors.light};
+    background-color: ${colors.white};
     font-family: ${fonts.serif};
     font-size: ${fontSizes.default};
     font-weight: 400;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   h1,

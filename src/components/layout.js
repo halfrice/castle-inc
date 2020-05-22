@@ -5,6 +5,7 @@ import styled from "styled-components"
 import "normalize.css/normalize.css"
 import { Footer, Nav, Seo } from "~components"
 import { Globals } from "~styles"
+import { DisplayProvider } from "~contexts"
 
 const StyledLayout = styled.div`
   display: grid;
@@ -29,15 +30,17 @@ const Layout = ({ children }) => {
         }
       `}
       render={({ site }) => (
-        <StyledLayout id="layout">
-          <Seo metadata={site.siteMetadata} />
-          <Globals />
-          <StyledDisplay id="display">
-            <Nav />
-            {children}
-            <Footer />
-          </StyledDisplay>
-        </StyledLayout>
+        <DisplayProvider>
+          <StyledLayout id="layout">
+            <Seo metadata={site.siteMetadata} />
+            <Globals />
+            <StyledDisplay id="display">
+              <Nav />
+              {children}
+              <Footer />
+            </StyledDisplay>
+          </StyledLayout>
+        </DisplayProvider>
       )}
     />
   )
